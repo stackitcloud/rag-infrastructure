@@ -1,0 +1,23 @@
+{{- if .Values.confluenceUpdater.enabled -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: confluence-updater
+spec:
+  schedule: {{ .Values.confluenceUpdater.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-fastapi
+            image: curlimages/curl:7.85.0
+            args:
+              - -X
+              - POST
+              - {{ .Values.confluenceUpdater.fastapiEndpoint | quote }}
+          restartPolicy: OnFailure
+{{- end }}
