@@ -10,6 +10,11 @@ metadata:
     {{- end }}
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "6000"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    #nginx.ingress.kubernetes.io/configuration-snippet: |
+    #  more_set_headers "Access-Control-Allow-Origin: $http_origin";
     nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
     nginx.ingress.kubernetes.io/cors-max-age: "100"
     nginx.ingress.kubernetes.io/enable-cors: "true"
@@ -17,10 +22,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /chat/$2
     {{- if .Values.shared.config.tls.enabled }}
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://{{ .Values.backend.ingress.host.name }}, https://admin.{{ .Values.backend.ingress.host.name }}"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:4200, https://{{ .Values.backend.ingress.host.name }}, https://admin.{{ .Values.backend.ingress.host.name }}"
     {{- else }}
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "http://{{ .Values.backend.ingress.host.name }}, http://admin.{{ .Values.backend.ingress.host.name }}"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     {{- end }}
 spec:
   {{- if .Values.shared.config.tls.enabled }}
@@ -40,5 +45,57 @@ spec:
             service:
               name: {{ $.Values.backend.name }}
               port:
-                number: {{ .Values.backend.ingress.host.port }}
+                number: {{ .Values.backend.ingress.host.port }}                      
+{{- end }}
+---
+{{- if .Values.backend.ingress.enabled -}}
+{{- if .Values.backend.mcp.enabled }}     
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mcp
+  annotations:
+    {{- if .Values.shared.config.basicAuth.enabled }}
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    {{- end }}
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "6000"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    #nginx.ingress.kubernetes.io/configuration-snippet: |
+    #  more_set_headers "Access-Control-Allow-Origin: $http_origin";
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
+    nginx.ingress.kubernetes.io/cors-max-age: "100"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, DELETE, OPTIONS"
+    {{- if .Values.shared.config.tls.enabled }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:4200, https://{{ .Values.backend.ingress.host.name }}, https://admin.{{ .Values.backend.ingress.host.name }}"
+    {{- else }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    {{- end }}
+spec:
+  {{- if .Values.shared.config.tls.enabled }}
+  tls:
+    - hosts:
+      - {{ .Values.shared.config.tls.host }}
+      secretName: {{ .Values.shared.config.tls.secretName }}
+  {{- end }}
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.backend.ingress.host.name }}
+    http:
+      paths:             
+        - path: /mcp/(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $.Values.backend.name }}
+              port:
+                number: {{ .Values.backend.mcp.port }}            
+{{- end }}                          
 {{- end }}

@@ -170,8 +170,11 @@ The following values should be adjusted for the deployment:
 
 ```yaml
 backend:
-  secrets:
+  mcp:
+    toolName: ...
+    toolDescription: ...
 
+  secrets:
     basicAuth: ...
     langfuse:
       publicKey: ...
@@ -248,6 +251,8 @@ global:
 ```
 
 > 📝 NOTE: All values containg `...` are placeholders and have to be replaced with real values.
+
+> 📝 NOTE: `backend.mcp.toolName` and `backend.mcp.toolDescription` should be adjusted to reflect the data that is served by the RAG in order to make it easy for the mcp client to use the correct mcp server.
 
 > ⓘ INFO: This deployment comes with multiple options. You can change the `global.config.envs.rag_class_types.RAG_CLASS_TYPE_LLM_TYPE` in `./rag/values.yaml` to one of the following values:
 >

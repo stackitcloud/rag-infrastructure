@@ -85,6 +85,9 @@
 {{- printf "%s-chat-history-configmap" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "configmap.mcp" -}}
+{{- printf "%s-mcp-configmap" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 
 # ingress
 {{- define "backend.ingressFullName" -}}
@@ -93,4 +96,8 @@
 
 {{- define "backend.fullImageName" -}}
 {{- printf "%s/%s:%s" .Values.backend.image.repository .Values.backend.image.name .Values.backend.image.tag | trimSuffix ":" | trimSuffix "-" }}
+{{- end -}}
+
+{{- define "mcp.fullImageName" -}}
+{{- printf "%s/%s:%s" .Values.backend.mcp.image.repository .Values.backend.mcp.image.name .Values.backend.mcp.image.tag | trimSuffix ":" | trimSuffix "-" }}
 {{- end -}}
