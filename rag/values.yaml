@@ -162,11 +162,6 @@ frontend:
     type: ClusterIP
     port: 8080
 
-  config:
-    envs:
-      VITE_API_URL: http://rag.localhost/api
-      VITE_CHAT_URL: http://rag.localhost
-
   ingress:
     enabled: true
     host:
