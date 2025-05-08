@@ -1,6 +1,8 @@
 features:
   ollama:
     enabled: false
+  minio:
+    enabled: false
   langfuse:
     enabled: true
   qdrant:
