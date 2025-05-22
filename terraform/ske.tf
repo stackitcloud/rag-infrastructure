@@ -10,7 +10,7 @@ resource "stackit_ske_cluster" "rag_cluster" {
       os_name            = "flatcar"
       minimum            = "1"
       maximum            = "1"
-      max_surge          = 0
+      max_surge          = "1"
       availability_zones = ["${var.region}-1"] # Single availability zone
       volume_size        = 50
       volume_type        = "storage_premium_perf1"
