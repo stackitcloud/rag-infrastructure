@@ -6,7 +6,7 @@ resource "stackit_ske_cluster" "rag_cluster" {
   node_pools = [
     {
       name               = "${var.name_prefix}-node"
-      machine_type       = "g1.2"
+      machine_type       = "g1.4"
       os_name            = "flatcar"
       minimum            = "1"
       maximum            = "1"
