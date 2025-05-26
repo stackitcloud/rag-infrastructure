@@ -1,6 +1,15 @@
-resource "stackit_objectstorage_bucket" "docs" {
+locals {
+  timestamp = formatdate("YYYYMMDDHHMMSS", timestamp())  # Or your desired format
+}
+
+resource "stackit_objectstorage_bucket" "documents" {
+  name       = "${var.name_prefix}-documents-${local.timestamp}"
   project_id = var.project_id
-  name       = "${var.name_prefix}-documents"
+}
+
+resource "stackit_objectstorage_bucket" "langfuse" {
+  name       = "${var.name_prefix}-langfuse-${local.timestamp}"
+  project_id = var.project_id
 }
 
 resource "stackit_objectstorage_credentials_group" "rag_creds_group" {
@@ -25,5 +34,5 @@ output "object_storage_secret_key" {
 }
 
 output "object_storage_bucket" {
-  value = stackit_objectstorage_bucket.docs.name
+  value = stackit_objectstorage_bucket.documents.name
 }
