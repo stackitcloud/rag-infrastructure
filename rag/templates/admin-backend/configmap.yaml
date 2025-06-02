@@ -37,7 +37,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  naem: {{ template "configmap.sourceUploaderName" . }}
+  name: {{ template "configmap.sourceUploaderName" . }}
 data:
   {{- range $key, $value := .Values.adminBackend.envs.sourceUploader }}
   {{ $key }}: {{ $value | quote }}
