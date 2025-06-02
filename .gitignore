@@ -1,12 +1,7 @@
 **/cr-secret.yaml
 **/customer-values.yaml
-<<<<<<< Updated upstream
-auth
-*\-values.yaml
-=======
 **/auth
 
->>>>>>> Stashed changes
 */terraform.tfstate
 */Chart.lock
 *.tgz
