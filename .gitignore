@@ -1,5 +1,6 @@
 **/cr-secret.yaml
 **/customer-values.yaml
+**/auth
 
 **/*.lock.*
 
