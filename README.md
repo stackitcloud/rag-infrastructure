@@ -85,19 +85,19 @@ langfuse:
     - name: DATABASE_URL
       value: "postgresql://username:password@postgres-host:5432/langfuse" # Your PostgreSQL connection string
     - name: LANGFUSE_INIT_ORG_ID
-      value: "..." # Optional: Pre-create organization
+      value: ... # Optional: Pre-create organization
     - name: LANGFUSE_INIT_PROJECT_ID
-      value: "..." # Optional: Pre-create project
+      value: ... # Optional: Pre-create project
     - name: LANGFUSE_INIT_PROJECT_PUBLIC_KEY
-      value: "..." # Optional: Set initial public key
+      value: ... # Optional: Set initial public key
     - name: LANGFUSE_INIT_PROJECT_SECRET_KEY
-      value: "..." # Optional: Set initial secret key
+      value: ... # Optional: Set initial secret key
     - name: LANGFUSE_INIT_USER_EMAIL
-      value: "..." # Optional: Create initial user
+      value: ... # Optional: Create initial user
     - name: LANGFUSE_INIT_USER_NAME
-      value: "..." # Optional: Initial user name
+      value: ... # Optional: Initial user name
     - name: LANGFUSE_INIT_USER_PASSWORD
-      value: "..." # Optional: Initial user password
+      value: ... # Optional: Initial user password
 ```
 
 Besides, you can deploy Langfuse in a two-step approach. First, you deploy Langfuse without the API keys, and then you can create the API keys via the Web UI. Therefore, after deployment, you have to sign up in the Web UI and create a project in the local Langfuse instance, create API keys via the settings; see below.
@@ -165,7 +165,7 @@ langfuse:
   langfuse:
     additionalEnv:
     - name: REDIS_CONNECTION_STRING
-      value: "redis:""
+      value: "redis:"
 ```
 
 ### 1.4 Frontend
