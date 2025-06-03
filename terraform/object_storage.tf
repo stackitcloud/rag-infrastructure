@@ -1,14 +1,10 @@
-locals {
-  timestamp = formatdate("YYYYMMDDHHMMSS", timestamp())  # Or your desired format
-}
-
 resource "stackit_objectstorage_bucket" "documents" {
-  name       = "${var.name_prefix}-documents-${local.timestamp}"
+  name       = "${var.name_prefix}-documents-${var.deployment_timestamp}"
   project_id = var.project_id
 }
 
 resource "stackit_objectstorage_bucket" "langfuse" {
-  name       = "${var.name_prefix}-langfuse-${local.timestamp}"
+  name       = "${var.name_prefix}-langfuse-${var.deployment_timestamp}"
   project_id = var.project_id
 }
 
