@@ -4,20 +4,20 @@ variable "project_id" {
 }
 
 variable "dns_name" {
- description = "DNS name for the service"
- type        = string
- validation {
-   condition     = regex("^([a-z0-9-]+)$", var.dns_name)
-   error_message = "The DNS name must only contain lowercase letters, numbers, and hyphens."
- }
+  description = "DNS name for the service"
+  type        = string
+  validation {
+    condition     = can(regex("^([a-z0-9.-]+)$", var.dns_name))
+    error_message = "The DNS name must only contain lowercase letters, numbers, hyphens, and dots."
+  }
 }
 
 variable "rag_cluster_name" {
   description = "Name of the RAG cluster. Max length: 11 characters."
   type        = string
   validation {
-    condition     = regex("^([a-z0-9-]+)$", var.rag_cluster_name)
-    error_message = "The RAG cluster name must only contain lowercase letters, numbers, and hyphens."
+    condition     = can(regex("^([a-z0-9-]+)$", var.rag_cluster_name)) && length(var.rag_cluster_name) <= 11
+    error_message = "The RAG cluster name must only contain lowercase letters, numbers, and hyphens, and be max 11 characters long."
   }
 }
 
