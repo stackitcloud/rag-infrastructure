@@ -45,11 +45,11 @@ spec:
             service:
               name: {{ $.Values.backend.name }}
               port:
-                number: {{ .Values.backend.ingress.host.port }}                      
+                number: {{ .Values.backend.ingress.host.port }}
 {{- end }}
 ---
 {{- if .Values.backend.ingress.enabled -}}
-{{- if .Values.backend.mcp.enabled }}     
+{{- if .Values.backend.mcp.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -68,7 +68,6 @@ metadata:
     #  more_set_headers "Access-Control-Allow-Origin: $http_origin";
     nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
     nginx.ingress.kubernetes.io/cors-max-age: "100"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, DELETE, OPTIONS"
     {{- if .Values.shared.config.tls.enabled }}
@@ -89,13 +88,13 @@ spec:
   rules:
   - host: {{ .Values.backend.ingress.host.name }}
     http:
-      paths:             
-        - path: /mcp/(.*)
+      paths:
+        - path: /mcp
           pathType: Prefix
           backend:
             service:
               name: {{ $.Values.backend.name }}
               port:
-                number: {{ .Values.backend.mcp.port }}            
-{{- end }}                          
+                number: {{ .Values.backend.mcp.port }}
+{{- end }}
 {{- end }}

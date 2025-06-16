@@ -1,6 +1,6 @@
 **/cr-secret.yaml
 **/customer-values.yaml
-
+**/mcp.json
 */terraform.tfstate
 */Chart.lock
 *.tgz
@@ -147,3 +147,4 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+auth
