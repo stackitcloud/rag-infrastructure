@@ -1,6 +1,8 @@
 features:
   ollama:
     enabled: false
+  minio:
+    enabled: false
   langfuse:
     enabled: true
   qdrant:
@@ -104,7 +106,7 @@ backend:
 
   envs:
     stackitVllm:
-      STACKIT_VLLM_MODEL: neuralmagic/Meta-Llama-3.1-70B-Instruct-FP8
+      STACKIT_VLLM_MODEL: cortecs/Llama-3.3-70B-Instruct-FP8-Dynamic
       STACKIT_VLLM_BASE_URL: https://api.openai-compat.model-serving.eu01.onstackit.cloud/v1
     database:
       VECTOR_DB_COLLECTION_NAME: rag-db
@@ -174,11 +176,6 @@ frontend:
   service:
     type: ClusterIP
     port: 8080
-
-  config:
-    envs:
-      VITE_API_URL: http://rag.localhost/api
-      VITE_CHAT_URL: http://rag.localhost
 
   ingress:
     enabled: true
@@ -277,17 +274,11 @@ adminBackend:
     chunker:
       CHUNKER_MAX_SIZE: 1000
       CHUNKER_OVERLAP: 300
-    confluenceLoader:
-      CONFLUENCE_URL: ""
-      CONFLUENCE_SPACE_KEY: ""
-      CONFLUENCE_DOCUMENT_NAME: ""
     keyValueStore:
       USECASE_KEYVALUE_PORT: 6379
       USECASE_KEYVALUE_HOST: "rag-keydb"
-
-  secrets:
-    confluenceLoader:
-      token: ""
+    sourceUploader:
+      SOURCE_UPLOADER_TIMEOUT: 3600
 
 extractor:
   replicaCount: 1

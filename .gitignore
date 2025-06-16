@@ -1,5 +1,14 @@
 **/cr-secret.yaml
 **/customer-values.yaml
+**/auth
+
+**/*.lock.*
+
+auth
+
+.DS_Store
+
+*-values.yaml
 **/mcp.json
 */terraform.tfstate
 */Chart.lock
