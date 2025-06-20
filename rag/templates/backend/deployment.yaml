@@ -40,7 +40,7 @@ spec:
         - name: log-dir
           mountPath: /app/rag-backend/log
       containers:
-      {{- if .Values.backend.mcp.enabled }}        
+      {{- if .Values.features.mcp.enabled }}
       - name: {{ .Values.backend.mcp.name }}
         image: {{ include "mcp.fullImageName" . }}
         imagePullPolicy: {{ .Values.backend.mcp.image.pullPolicy }}

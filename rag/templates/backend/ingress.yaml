@@ -49,7 +49,7 @@ spec:
 {{- end }}
 ---
 {{- if .Values.backend.ingress.enabled -}}
-{{- if .Values.backend.mcp.enabled }}
+{{- if .Values.features.mcp.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

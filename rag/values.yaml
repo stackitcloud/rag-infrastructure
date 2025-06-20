@@ -11,15 +11,15 @@ features:
     enabled: true
   keydb:
     enabled: true
+  mcp:
+    enabled: true
 
 backend:
 
   mcp:
-    enabled: true
     name: "mcp"
     port: "8000"
-    toolName: "chat_with_rag"
-    toolDescription: "Chat with the RAG backend system to get answers based on indexed documents"
+    host: "0.0.0.0"
     image:
       repository: ghcr.io/stackitcloud/rag-template
       name: rag-mcp
