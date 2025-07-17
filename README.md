@@ -1,3 +1,19 @@
+# 🚨 REPOSITORY DEPRECATED 🚨
+
+## ⚠️ This repository is no longer maintained ⚠️
+
+### 📢 Important Notice
+
+**As of July 15, 2025, the contents of this repository have been migrated to a new monorepo structure to simplify development, improve code reuse, and streamline CI/CD workflows.**
+
+### 🔄 Migration Information
+
+- **New Repository**: Development continues in the [`stackitcloud/rag-template`](https://github.com/stackitcloud/rag-template) repository
+- **Action Required**: All future updates, issues, and pull requests should be directed there
+- **Status**: This repo is preserved for historical reference only
+
+---
+
 # RAG Infrastructure
 
 This repository contains the infrastructure setup for the STACKIT RAG template.
